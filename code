@@ -1,0 +1,1236 @@
+import tkinter as tk
+from random import randint
+
+window = tk.Tk()
+window.title("planszowka")
+window.configure(bg = "light steel blue")
+
+#PLAYERS
+#------------------------------------------------------------------------------
+pl1nic = tk.StringVar();
+pl2nic = tk.StringVar();
+
+pl1 = tk.Label(window, font = 30, bg = "light steel blue", text = "Podaj nick:")
+pl1.place(relx = 0.0, rely = 0.0, anchor = 'nw')
+
+pl1_nic = tk.Entry(window, font = 30)
+pl1_nic.place(relx = 0.07, rely = 0.0, anchor = 'nw')
+
+pl2 = tk.Label(window, font = 30, bg = "light steel blue", text = "Podaj nick:")
+pl2.place(relx = 0.0, rely = 0.04, anchor = 'nw')
+
+pl2_nic = tk.Entry(window, font = 30)
+pl2_nic.place(relx = 0.07, rely = 0.04, anchor = 'nw')
+
+def getp():
+    pl1nic.set("1 - "+pl1_nic.get())
+    pl2nic.set("2 - "+pl2_nic.get())
+
+pl_get = tk.Button(window, text = "OK", bg = "white", command = getp)
+pl_get.place(relx = 0.21, rely = 0.02, anchor = 'nw')
+
+#MONEY
+#-------------------------------------------------------------------------------
+p1_money = tk.IntVar();
+p1_money_text = tk.StringVar();
+p2_money = tk.IntVar();
+p2_money_text = tk.StringVar();
+
+p1_money.set(15000)
+p1_money_text.set(str(p1_money.get())+"$")
+p2_money.set(15000)
+p2_money_text.set(str(p2_money.get())+"$")
+
+#MOVEMENT
+#-------------------------------------------------------------------------------
+
+p1_m = tk.StringVar();
+p2_m = tk.StringVar();
+p3_m = tk.StringVar();
+p4_m = tk.StringVar();
+p5_m = tk.StringVar();
+p6_m = tk.StringVar();
+p7_m = tk.StringVar();
+p8_m = tk.StringVar();
+p9_m = tk.StringVar();
+p10_m = tk.StringVar();
+p11_m = tk.StringVar();
+
+d1_m = tk.StringVar();
+d2_m = tk.StringVar();
+d3_m = tk.StringVar();
+d4_m = tk.StringVar();
+d5_m = tk.StringVar();
+d6_m = tk.StringVar();
+d7_m = tk.StringVar();
+d8_m = tk.StringVar();
+d9_m = tk.StringVar();
+d10_m = tk.StringVar();
+
+l1_m = tk.StringVar();
+l2_m = tk.StringVar();
+l3_m = tk.StringVar();
+l4_m = tk.StringVar();
+l5_m = tk.StringVar();
+l6_m = tk.StringVar();
+l7_m = tk.StringVar();
+l8_m = tk.StringVar();
+l9_m = tk.StringVar();
+l10_m = tk.StringVar();
+
+g1_m = tk.StringVar();
+g2_m = tk.StringVar();
+g3_m = tk.StringVar();
+g4_m = tk.StringVar();
+g5_m = tk.StringVar();
+g6_m = tk.StringVar();
+g7_m = tk.StringVar();
+g8_m = tk.StringVar();
+g9_m = tk.StringVar();
+
+listm = [p1_m, p2_m, p3_m, p4_m, p5_m, p6_m, p7_m, p8_m, p9_m, p10_m, p11_m,
+         d1_m, d2_m, d3_m, d4_m, d5_m, d6_m, d7_m, d8_m, d9_m, d10_m,
+         l1_m, l2_m, l3_m, l4_m, l5_m, l6_m, l7_m, l8_m, l9_m, l10_m,
+         g1_m, g2_m, g3_m, g4_m, g5_m, g6_m, g7_m, g8_m, g9_m]
+
+p1_m.set("p1")
+p2_m.set("p2")
+p3_m.set("p3")
+p4_m.set("p4")
+p5_m.set("p5")
+p6_m.set("p6")
+p7_m.set("p7")
+p8_m.set("p8")
+p9_m.set("p9")
+p10_m.set("p10")
+p11_m.set("p11")
+
+d1_m.set("d1")
+d2_m.set("d2")
+d3_m.set("d3")
+d4_m.set("d4")
+d5_m.set("d5")
+d6_m.set("d6")
+d7_m.set("d7")
+d8_m.set("d8")
+d9_m.set("d9")
+
+l1_m.set("l1")
+l2_m.set("l2")
+l3_m.set("l3")
+l4_m.set("l4")
+l5_m.set("l5")
+l6_m.set("l6")
+l7_m.set("l7")
+l8_m.set("l8")
+l9_m.set("l9")
+l10_m.set("l10")
+
+g1_m.set("g1")
+g2_m.set("g2")
+g3_m.set("g3")
+g4_m.set("g4")
+g5_m.set("g5")
+g6_m.set("g6")
+g7_m.set("g7")
+g8_m.set("g8")
+g9_m.set("g9")
+
+#PRISON_M
+prison_m = tk.StringVar();
+prison_m.set("")
+tryy1 = tk.IntVar()
+tryy1.set(1)
+tryy2 = tk.IntVar();
+tryy2.set(1)
+
+tryy1 = tk.IntVar();
+tryy1.set(1)
+
+
+for i in range(0, 40):
+    listm[i].set("")
+
+p1_m.set("1 2")
+
+#ESTATES
+#---------------------------------------------------------------------------------------------------------------
+#BROWN1
+owner_b1 = tk.IntVar();
+buy_b1 = tk.IntVar();
+pledge_b1 = tk.IntVar();
+sell_b1 = tk.IntVar();
+pay_b1 = tk.IntVar();
+build_b1 = tk.IntVar();
+
+owner_b1.set(0)
+buy_b1.set(600)
+pledge_b1.set(300)
+pay_b1.set(20)
+build_b1.set(500)
+
+#BROWN2
+owner_b2 = tk.IntVar();
+buy_b2 = tk.IntVar();
+pledge_b2 = tk.IntVar();
+sell_b2 = tk.IntVar();
+pay_b2 = tk.IntVar();
+build_b2 = tk.IntVar();
+
+owner_b2.set(0)
+buy_b2.set(600)
+pledge_b2.set(300)
+pay_b2.set(40)
+build_b2.set(500)
+
+#LIGHT_BLUE1
+owner_l_b1 = tk.IntVar();
+buy_l_b1 = tk.IntVar();
+pledge_l_b1 = tk.IntVar();
+sell_l_b1 = tk.IntVar();
+pay_l_b1 = tk.IntVar();
+build_l_b1 = tk.IntVar();
+
+owner_l_b1.set(0)
+buy_l_b1.set(1000)
+pledge_l_b1.set(500)
+pay_l_b1.set(60)
+build_l_b1.set(500)
+
+#LIGHT_BLUE2
+owner_l_b2 = tk.IntVar();
+buy_l_b2 = tk.IntVar();
+pledge_l_b2 = tk.IntVar();
+sell_l_b2 = tk.IntVar();
+pay_l_b2 = tk.IntVar();
+build_l_b2 = tk.IntVar();
+
+owner_l_b2.set(0)
+buy_l_b2.set(1000)
+pledge_l_b2.set(500)
+pay_l_b2.set(60)
+build_l_b2.set(500)
+
+#LIGHT_BLUE3
+owner_l_b3 = tk.IntVar();
+buy_l_b3 = tk.IntVar();
+pledge_l_b3 = tk.IntVar();
+sell_l_b3 = tk.IntVar();
+pay_l_b3 = tk.IntVar();
+build_l_b3 = tk.IntVar();
+
+owner_l_b3.set(0)
+buy_l_b3.set(1200)
+pledge_l_b3.set(600)
+pay_l_b3.set(80)
+build_l_b3.set(500)
+
+#PINK1
+owner_p1 = tk.IntVar();
+buy_p1 = tk.IntVar();
+pledge_p1 = tk.IntVar();
+sell_p1 = tk.IntVar();
+pay_p1 = tk.IntVar();
+build_p1 = tk.IntVar();
+
+owner_p1.set(0)
+buy_p1.set(1400)
+pledge_p1.set(700)
+pay_p1.set(100)
+build_p1.set(1000)
+
+#PINK2
+owner_p2 = tk.IntVar();
+buy_p2 = tk.IntVar();
+pledge_p2 = tk.IntVar();
+sell_p2 = tk.IntVar();
+pay_p2 = tk.IntVar();
+build_p2 = tk.IntVar();
+
+owner_p2.set(0)
+buy_p2.set(1400)
+pledge_p2.set(700)
+pay_p2.set(100)
+build_p2.set(1000)
+
+#PINK3
+owner_p3 = tk.IntVar();
+buy_p3 = tk.IntVar();
+pledge_p3 = tk.IntVar();
+sell_p3 = tk.IntVar();
+pay_p3 = tk.IntVar();
+build_p3 = tk.IntVar();
+
+owner_p3.set(0)
+buy_p3.set(1600)
+pledge_p3.set(800)
+pay_p3.set(120)
+build_p3.set(1000)
+
+#ORANGE1
+owner_o1 = tk.IntVar();
+buy_o1 = tk.IntVar();
+pledge_o1 = tk.IntVar();
+sell_o1 = tk.IntVar();
+pay_o1 = tk.IntVar();
+build_o1 = tk.IntVar();
+
+owner_o1.set(0)
+buy_o1.set(1800)
+pledge_o1.set(900)
+pay_o1.set(140)
+build_o1.set(1000)
+
+#ORANGE2
+owner_o2 = tk.IntVar();
+buy_o2 = tk.IntVar();
+pledge_o2 = tk.IntVar();
+sell_o2 = tk.IntVar();
+pay_o2 = tk.IntVar();
+build_o2 = tk.IntVar();
+
+owner_o2.set(0)
+buy_o2.set(1800)
+pledge_o2.set(900)
+pay_o2.set(140)
+build_o2.set(1000)
+
+#ORANGE3
+owner_o3 = tk.IntVar();
+buy_o3 = tk.IntVar();
+pledge_o3 = tk.IntVar();
+sell_o3 = tk.IntVar();
+pay_o3 = tk.IntVar();
+build_o3 = tk.IntVar();
+
+owner_o3.set(0)
+buy_o3.set(2000)
+pledge_o3.set(1000)
+pay_o3.set(160)
+build_o3.set(1000)
+
+#RED1
+owner_r1 = tk.IntVar();
+buy_r1 = tk.IntVar();
+pledge_r1 = tk.IntVar();
+sell_r1 = tk.IntVar();
+pay_r1 = tk.IntVar();
+build_r1 = tk.IntVar();
+
+owner_r1.set(0)
+buy_r1.set(2200)
+pledge_r1.set(1100)
+pay_r1.set(180)
+build_r1.set(1500)
+
+#RED2
+owner_r2 = tk.IntVar();
+buy_r2 = tk.IntVar();
+pledge_r2 = tk.IntVar();
+sell_r2 = tk.IntVar();
+pay_r2 = tk.IntVar();
+build_r2 = tk.IntVar();
+
+owner_r2.set(0)
+buy_r2.set(2200)
+pledge_r2.set(1100)
+pay_r2.set(180)
+build_r2.set(1500)
+
+#RED3
+owner_r3 = tk.IntVar();
+buy_r3 = tk.IntVar();
+pledge_r3 = tk.IntVar();
+sell_r3 = tk.IntVar();
+pay_r3 = tk.IntVar();
+build_r3 = tk.IntVar();
+
+owner_r3.set(0)
+buy_r3.set(2200)
+pledge_r3.set(1200)
+pay_r3.set(200)
+build_r3.set(1500)
+
+#YELLOW1
+owner_y1 = tk.IntVar();
+buy_y1 = tk.IntVar();
+pledge_y1 = tk.IntVar();
+sell_y1 = tk.IntVar();
+pay_y1 = tk.IntVar();
+build_y1 = tk.IntVar();
+
+owner_y1.set(0)
+buy_y1.set(2600)
+pledge_y1.set(1300)
+pay_y1.set(220)
+build_y1.set(1500)
+
+#YELLOW2
+owner_y2 = tk.IntVar();
+buy_y2 = tk.IntVar();
+pledge_y2 = tk.IntVar();
+sell_y2 = tk.IntVar();
+pay_y2 = tk.IntVar();
+build_y2 = tk.IntVar();
+
+owner_y2.set(0)
+buy_y2.set(2600)
+pledge_y2.set(1300)
+pay_y2.set(220)
+build_y2.set(1500)
+
+#YELLOW3
+owner_y3 = tk.IntVar();
+buy_y3 = tk.IntVar();
+pledge_y3 = tk.IntVar();
+sell_y3 = tk.IntVar();
+pay_y3 = tk.IntVar();
+build_y3 = tk.IntVar();
+
+owner_y3.set(0)
+buy_y3.set(2800)
+pledge_y3.set(1400)
+pay_y3.set(240)
+build_y3.set(1500)
+
+#GREEN1
+owner_g1 = tk.IntVar();
+buy_g1 = tk.IntVar();
+pledge_g1 = tk.IntVar();
+sell_g1 = tk.IntVar();
+pay_g1 = tk.IntVar();
+build_g1 = tk.IntVar();
+
+owner_g1.set(0)
+buy_g1.set(3000)
+pledge_g1.set(1500)
+pay_g1.set(260)
+build_g1.set(2000)
+
+#GREEN2
+owner_g2 = tk.IntVar();
+buy_g2 = tk.IntVar();
+pledge_g2 = tk.IntVar();
+sell_g2 = tk.IntVar();
+pay_g2 = tk.IntVar();
+build_g2 = tk.IntVar();
+
+owner_g2.set(0)
+buy_g2.set(3000)
+pledge_g2.set(1500)
+pay_g2.set(260)
+build_g2.set(2000)
+
+#GREEN3
+owner_g3 = tk.IntVar();
+buy_g3 = tk.IntVar();
+pledge_g3 = tk.IntVar();
+sell_g3 = tk.IntVar();
+pay_g3 = tk.IntVar();
+build_g3 = tk.IntVar();
+
+owner_g3.set(0)
+buy_g3.set(3200)
+pledge_g3.set(1600)
+pay_g3.set(280)
+build_g3.set(2000)
+
+#ROYAL_BLUE1
+owner_r_b1 = tk.IntVar();
+buy_r_b1 = tk.IntVar();
+pledge_r_b1 = tk.IntVar();
+sell_r_b1 = tk.IntVar();
+pay_r_b1 = tk.IntVar();
+build_r_b1 = tk.IntVar();
+
+owner_r_b1.set(0)
+buy_r_b1.set(3500)
+pledge_r_b1.set(1750)
+pay_r_b1.set(350)
+build_r_b1.set(2000)
+
+#ROYAL_BLUE2
+owner_r_b2 = tk.IntVar();
+buy_r_b2 = tk.IntVar();
+pledge_r_b2 = tk.IntVar();
+sell_r_b2 = tk.IntVar();
+pay_r_b2 = tk.IntVar();
+build_r_b2 = tk.IntVar();
+
+owner_r_b2.set(0)
+buy_r_b2.set(4000)
+pledge_r_b2.set(2000)
+pay_r_b2.set(500)
+build_r_b2.set(2000)
+
+#ESTATES LIST
+liste = [[2, owner_b1, buy_b1, pay_b1, pledge_b1, "b1"], [4, owner_b2, buy_b2, pay_b2, pledge_b2, "b2"],
+         [7, owner_l_b1, buy_l_b1, pay_l_b1, pledge_l_b1, "l_b1"], [9, owner_l_b2, buy_l_b2, pay_l_b2, pledge_l_b2, "l_b2"], [10, owner_l_b3, buy_l_b3, pay_l_b3, pledge_l_b3, "l_b3"],
+         [12, owner_p1, buy_p1, pay_p1, pledge_p1, "p1"], [14, owner_p2, buy_p2, pay_p2, pledge_p2, "p2"], [15, owner_p3, buy_p3, pay_p3, pledge_p3, "p3"],
+         [17, owner_o1, buy_o1, pay_o1, pledge_o1, "o1"], [19, owner_o2, buy_o2, pay_o2, pledge_o2, "o2"], [20, owner_o3, buy_o3, pay_o3, pledge_o3, "o3"],
+         [22, owner_r1, buy_r1, pay_r1, pledge_r1, "r1"], [24, owner_r2, buy_r2, pay_r2, pledge_r2, "r2"], [25, owner_r3, buy_r3, pay_r3, pledge_r3, "r3"],
+         [27, owner_y1, buy_y1, pay_y1, pledge_y1, "y1"], [28, owner_y2, buy_y2, pay_y2, pledge_y2, "y2"], [30, owner_y3, buy_y3, pay_y3, pledge_y3, "y3"],
+         [32, owner_g1, buy_g1, pay_g1, pledge_g1, "g1"], [33, owner_g2, buy_g2, pay_g2, pledge_g2, "g2"], [35, owner_g3, buy_g3, pay_g3, pledge_g3, "g3"],
+         [38, owner_r_b1, buy_r_b1, pay_r_b1, pledge_r_b1, "r_b1"], [40, owner_r_b2, buy_r_b2, pay_r_b2, pledge_r_b2, "r_b2"]]
+
+#MOVE
+#----------------------------------------------------------------------------------------------------------------
+valued1 = tk.IntVar();
+valued1.set(1)
+
+valued2 = tk.IntVar();
+valued2.set(1)
+
+valued = tk.IntVar();
+valued.set(1)
+
+p1_pos = tk.IntVar();
+p1_pos.set(1)
+
+p2_pos = tk.IntVar();
+p2_pos.set(1)
+
+pm = tk.IntVar();
+pm.set(1)
+
+#P1_M---------------------------------------------------------------------------------------------------------------
+
+def los():
+
+#P1_GO_TO_PRISON
+    if p1_pos.get() == 31:
+        screen_text.set("ruch gracza 2")
+        p1_pos.set(0)
+        l10_m.set((l10_m.get()).replace("1", ""))
+        prison_m.set((prison_m.get()) + "1")
+        pm.set(2)
+    
+    elif pm.get() == 1 and ("1" in prison_m.get()) == False:
+        screen_text.set("ruch gracza 2")
+        #valued1.set(randint(1, 6))
+        valued1.set(1)
+        p1_pos.set(p1_pos.get() + valued1.get())
+
+        helpp = tk.Label(textvariable = p1_pos)
+        helpp.place(relx = 0.0, rely = 0.3)
+
+        if p1_pos.get() >= 41:
+            p1_pos.set(p1_pos.get() - 40)
+            for i in range(0, 8):
+                if i == p1_pos.get() - 1:
+                    listm[i].set((listm[i].get()) + "1")
+                    for j in range(0, 40):
+                        if j != i:
+                            listm[j].set((listm[j].get()).replace("1", ""))
+            p1_money.set(p1_money.get()  +2000)
+            p1_money_text.set(str(p1_money.get()) + "$")
+            #TAX
+            if p1_pos.get() == 5:
+                p1_money.set(p1_money.get() - 2000)
+                p1_money_text.set(str(p1_money.get()) + "$")
+
+            if p1_pos.get() == 39:
+                p1_money.set(p1_money.get() - 1000)
+                p1_money_text.set(str(p1_money.get()) + "$")
+
+        elif p1_pos.get() <= 41:
+            for i in range(0, 40):
+                if i == p1_pos.get() - 1:
+                    listm[i].set((listm[i].get()) + "1")
+                    for j in range(0, 40):
+                        if j != i:
+                            listm[j].set((listm[j].get()).replace("1", ""))
+            #TAX
+            if p1_pos.get() == 5:
+                p1_money.set(p1_money.get() - 2000)
+                p1_money_text.set(str(p1_money.get()) + "$")
+
+            if p1_pos.get() == 39:
+                p1_money.set(p1_money.get() - 1000)
+                p1_money_text.set(str(p1_money.get()) + "$")
+        #P2P
+        for x in range(0, 22):
+            if liste[x][0] == p1_pos.get():
+                if liste[x][1].get() == 2:
+                    p1_money.set((p1_money.get()) - (liste[x][3].get()))
+                    p1_money_text.set(str(p1_money.get()) + "$")
+                    p2_money.set((p2_money.get()) + (liste[x][3].get()))
+                    p2_money_text.set(str(p2_money.get()) + "$")
+        pm.set(2)
+        valued.set(valued1.get())
+
+#P1_PRISON_M
+    elif pm.get() == 1 and ("1" in prison_m.get()) == True:
+        screen_text.set("ruch gracza 2")
+        if tryy1.get() == 1:
+            throw1 = randint(1, 6)
+            throw2 = randint(1, 6)
+            valued.set(str(throw1) + " " + str(throw2))
+            if throw1 == throw2:
+                prison_m.set((prison_m.get()).replace("1", ""))
+                p1_pos.set(11)
+                listm[10].set((listm[10].get()) + "1")
+                tryy1.set(1)
+                pm.set(2)
+            else:
+                tryy1.set(2)
+                pm.set(2)
+                
+        elif tryy1.get() == 2:
+            throw1 = randint(1, 6)
+            throw2 = randint(1, 6)
+            valued.set(str(throw1) + " " + str(throw2))
+            if throw1 == throw2:
+                prison_m.set((prison_m.get()).replace("1", ""))
+                p1_pos.set(11)
+                listm[10].set((listm[10].get()) + "1")
+                tryy1.set(1)
+                pm.set(2)
+            else:
+                tryy1.set(3)
+                pm.set(2)
+
+        elif tryy1.get() == 3:
+            throw1 = randint(1, 6)
+            throw2 = randint(1, 6)
+            valued.set(str(throw1) + " " + str(throw2))
+            if throw1 == throw2:
+                prison_m.set((prison_m.get()).replace("1", ""))
+                p1_pos.set(11)
+                listm[10].set((listm[10].get()) + "1")
+                tryy1.set(1)
+                pm.set(2)
+            else:
+                p1_money.set(p1_money.get() - 500)
+                p1_money_text.set(str(p1_money.get()) + "$")
+                tryy1.set(1)
+                prison_m.set((prison_m.get()).replace("1", ""))
+                p1_pos.set(11)
+                listm[10].set((listm[10].get()) + "1")
+                pm.set(2)
+
+#P2_M---------------------------------------------------------------------------------------------------------------
+
+#P2_GO_TO_PRISON
+    elif p2_pos.get() == 31:
+        screen_text.set("ruch gracza 1")
+        p2_pos.set(0)
+        l10_m.set((l10_m.get()).replace("2", ""))
+        prison_m.set((prison_m.get()) + "2")
+
+    elif pm.get() == 2 and ("2" in prison_m.get()) == False:
+        screen_text.set("ruch gracza 1")
+        #valued2.set(randint(1, 6))
+        valued2.set(1)
+        p2_pos.set(p2_pos.get() + valued2.get())
+
+        helppp = tk.Label(textvariable = p2_pos)
+        helppp.place(relx = 0.0, rely = 0.35)
+
+        if p2_pos.get() >= 41:
+            p2_pos.set(p2_pos.get() - 40)
+            for i in range(0, 8):
+                if i == p2_pos.get() - 1:
+                    listm[i].set((listm[i].get()) + "2")
+                    for j in range(0, 40):
+                        if j != i:
+                            listm[j].set((listm[j].get()).replace("2", ""))
+            p2_money.set(p2_money.get() + 2000)
+            p2_money_text.set(str(p2_money.get()) + "$")
+            #TAX
+            if p2_pos.get() == 5:
+                p2_money.set(p2_money.get() - 2000)
+                p2_money_text.set(str(p2_money.get()) + "$")
+
+            if p2_pos.get() == 39:
+                p2_money.set(p2_money.get() - 1000)
+                p2_money_text.set(str(p2_money.get()) + "$")
+
+        elif p2_pos.get() <= 41:
+            for i in range(0, 40):
+                if i == p2_pos.get() - 1:
+                    listm[i].set((listm[i].get()) + "2")
+                    for j in range(0, 40):
+                        if j != i:
+                            listm[j].set((listm[j].get()).replace("2", ""))
+            #TAX
+            if p2_pos.get() == 5:
+                p2_money.set(p2_money.get() - 2000)
+                p2_money_text.set(str(p2_money.get()) + "$")
+
+            if p2_pos.get() == 39:
+                p2_money.set(p2_money.get() - 1000)
+                p2_money_text.set(str(p2_money.get()) + "$")
+        #P2P
+        for x in range(0, 22):
+            if liste[x][0] == p2_pos.get():
+                if liste[x][1].get() == 1:
+                    p2_money.set((p2_money.get()) - (liste[x][3].get()))
+                    p2_money_text.set(str(p2_money.get()) + "$")
+                    p1_money.set((p1_money.get()) + (liste[x][3].get()))
+                    p1_money_text.set(str(p1_money.get()) + "$")
+        pm.set(1)
+        valued.set(valued2.get())
+
+#P2_PRISON_M
+    elif pm.get() == 2 and ("2" in prison_m.get()) == True:
+        screen_text.set("ruch gracza 1")
+        if tryy2.get() == 1:
+            throw1 = randint(1, 6)
+            throw2 = randint(1, 6)
+            valued.set(str(throw1) + " " + str(throw2))
+            if throw1 == throw2:
+                prison_m.set((prison_m.get()).replace("2", ""))
+                p2_pos.set(11)
+                listm[10].set((listm[10].get()) + "2")
+                tryy2.set(1)
+                pm.set(1)
+            else:
+                tryy2.set(2)
+                pm.set(1)
+                
+        elif tryy2.get() == 2:
+            throw1 = randint(1, 6)
+            throw2 = randint(1, 6)
+            valued.set(str(throw1) + " " + str(throw2))
+            if throw1 == throw2:
+                prison_m.set((prison_m.get()).replace("2", ""))
+                p2_pos.set(11)
+                listm[10].set((listm[10].get()) + "2")
+                tryy2.set(1)
+            else:
+                tryy2.set(3)
+                pm.set(1)
+
+        elif tryy2.get() == 3:
+            throw1 = randint(1, 6)
+            throw2 = randint(1, 6)
+            valued.set(str(throw1) + " " + str(throw2))
+            if throw1 == throw2:
+                prison_m.set((prison_m.get()).replace("2", ""))
+                p2_pos.set(11)
+                listm[10].set((listm[10].get()) + "2")
+                tryy2.set(1)
+                pm.set(1)
+            else:
+                p2_money.set(p2_money.get() - 500)
+                p2_money_text.set(str(p2_money.get()) + "$")
+                tryy2.set(1)
+                prison_m.set((prison_m.get()).replace("2", ""))
+                p2_pos.set(11)
+                listm[10].set((listm[10].get()) + "2")
+                pm.set(1)
+     
+#DICE
+#-----------------------------------------------------------------------------------------------------------
+            
+dice = tk.Button(window, padx = 30, pady = 30, textvariable = valued, bg = "white", command = los)
+dice.place(relx = 0.05, rely = 0.4, anchor = 'nw')
+
+#CARDS
+#-----------------------------------------------------------------------------------------------------------
+#CHANCE
+cc_text = tk.StringVar();
+cc_text.set("SZANSA")
+cc = tk.Label(window, padx = 25, pady = 25, borderwidth = 2, relief = "groove", textvariable = cc_text, bg = "khaki2")
+cc.place(relx = 0.56, rely = 0.4, anchor = 'ne')
+
+#SOCIAL
+cs_text = tk.StringVar();
+cs_text.set("KASA")
+cs = tk.Label(window, padx = 25, pady = 25, borderwidth = 2, relief = "groove", textvariable = cs_text, bg = "MediumPurple3")
+cs.place(relx = 0.85, rely = 0.4, anchor = 'ne')
+
+#BOARD
+#-------------------------------------------------------------------------------
+#P
+p1 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p1_m, bg = "white")
+p1.place(relx = 0.9, rely = 0.0, anchor = 'ne')
+
+p2 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p2_m, bg = "salmon4")
+p2.place(relx = 0.9, rely = 0.09, anchor = 'ne')
+
+p3 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p3_m, bg = "MediumPurple3")
+p3.place(relx = 0.9, rely = 0.18, anchor = 'ne')
+
+p4 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p4_m, bg = "salmon4")
+p4.place(relx = 0.9, rely = 0.27, anchor = 'ne')
+
+p5 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p5_m, bg = "grey45")
+p5.place(relx = 0.9, rely = 0.36, anchor = 'ne')
+
+#TAX1
+tax1 = tk.Label(window, bg = "light steel blue", text = "Podatek - 2000$")
+tax1.place(relx = 0.97, rely = 0.38, anchor = "ne")
+
+p6 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p6_m, bg = "seashell3")
+p6.place(relx = 0.9, rely = 0.45, anchor = 'ne')
+
+p7 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p7_m, bg = "sky blue2")
+p7.place(relx = 0.9, rely = 0.54, anchor = 'ne')
+
+p8 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p8_m, bg = "khaki2")
+p8.place(relx = 0.9, rely = 0.63, anchor = 'ne')
+
+p9 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p9_m, bg = "sky blue2")
+p9.place(relx = 0.9, rely = 0.72, anchor = 'ne')
+
+p10 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p10_m, bg = "sky blue2")
+p10.place(relx = 0.9, rely = 0.81, anchor = 'ne')
+
+p11 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = p11_m, bg = "white")
+p11.place(relx = 0.9, rely = 0.9, anchor = 'ne')
+
+#PRISON
+prison = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = prison_m)
+prison.place(relx = 0.94, rely = 0.9, anchor = 'ne')
+
+#G
+g1 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g9_m, bg = "royal blue")
+g1.place(relx = 0.858, rely = 0.0, anchor = 'ne')
+
+g2 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g8_m, bg = "grey45")
+g2.place(relx = 0.816, rely = 0.0, anchor = 'ne')
+
+#TAX2
+tax2 = tk.Label(window, bg = "light steel blue", text = "- 1000$")
+tax2.place(relx = 0.811, rely = 0.089, anchor = "ne")
+
+g3 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g7_m, bg = "royal blue")
+g3.place(relx = 0.774, rely = 0.0, anchor = 'ne')
+
+g4 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g6_m, bg = "khaki2")
+g4.place(relx = 0.732, rely = 0.0, anchor = 'ne')
+
+g5 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g5_m, bg = "seashell3")
+g5.place(relx = 0.690, rely = 0.0, anchor = 'ne')
+
+g6 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g4_m, bg = "green4")
+g6.place(relx = 0.648, rely = 0.0, anchor = 'ne')
+
+g7 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g3_m, bg = "MediumPurple3")
+g7.place(relx = 0.606, rely = 0.0, anchor = 'ne')
+
+g8 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g2_m, bg = "green4")
+g8.place(relx = 0.564, rely = 0.0, anchor = 'ne')
+
+g9 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = g1_m, bg = "green4")
+g9.place(relx = 0.522, rely = 0.0, anchor = 'ne')
+
+
+#L
+l1 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l10_m, bg = "midnightblue")
+l1.place(relx = 0.480, rely = 0.0, anchor = 'ne')
+
+l2 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l9_m, bg = "yellow")
+l2.place(relx = 0.480, rely = 0.09, anchor = 'ne')
+
+l3 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l8_m, bg = "darksalmon")
+l3.place(relx = 0.480, rely = 0.18, anchor = 'ne')
+
+l4 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l7_m, bg = "yellow")
+l4.place(relx = 0.480, rely = 0.27, anchor = 'ne')
+
+l5 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l6_m, bg = "yellow")
+l5.place(relx = 0.480, rely = 0.36, anchor = 'ne')
+
+l6 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l5_m, bg = "seashell3")
+l6.place(relx = 0.480, rely = 0.45, anchor = 'ne')
+
+l7 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l4_m, bg = "red2")
+l7.place(relx = 0.480, rely = 0.54, anchor = 'ne')
+
+l8 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l3_m, bg = "red2")
+l8.place(relx = 0.480, rely = 0.63, anchor = 'ne')
+
+l9 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l2_m, bg = "khaki2")
+l9.place(relx = 0.480, rely = 0.72, anchor = 'ne')
+
+l10 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = l1_m, bg = "red2")
+l10.place(relx = 0.480, rely = 0.81, anchor = 'ne')
+
+#D
+
+d1 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d1_m, bg = "hotpink2")
+d1.place(relx = 0.858, rely = 0.9, anchor = 'ne')
+
+d2 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d2_m, bg = "darksalmon")
+d2.place(relx = 0.816, rely = 0.9, anchor = 'ne')
+
+d3 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d3_m, bg = "hotpink2")
+d3.place(relx = 0.774, rely = 0.9, anchor = 'ne')
+
+d4 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d4_m, bg = "hotpink2")
+d4.place(relx = 0.732, rely = 0.9, anchor = 'ne')
+
+d5 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d5_m, bg = "seashell3")
+d5.place(relx = 0.690, rely = 0.9, anchor = 'ne')
+
+d6 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d6_m, bg = "goldenrod1")
+d6.place(relx = 0.648, rely = 0.9, anchor = 'ne')
+
+d7 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d7_m, bg = "MediumPurple3")
+d7.place(relx = 0.606, rely = 0.9, anchor = 'ne')
+
+d8 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d8_m, bg = "goldenrod1")
+d8.place(relx = 0.564, rely = 0.9, anchor = 'ne')
+
+d9 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d9_m, bg = "goldenrod1")
+d9.place(relx = 0.522, rely = 0.9, anchor = 'ne')
+
+d10 = tk.Label(window, padx = 25, pady = 20, borderwidth = 2, relief = "groove", textvariable = d10_m, bg = "white")
+d10.place(relx = 0.480, rely = 0.9, anchor = 'ne')
+
+#DESCRIPTION
+#------------------------------------------------------------------------------------------------------------------------------------------
+#BROWN
+p2_d_text = tk.StringVar()
+p2_d_text.set(str(buy_b1.get()) + "$\n" + str(pay_b1.get()) + "$\n" + str(pledge_b1.get()) + "$")
+p2_d = tk.Label(window, bg = "light steel blue", textvariable = p2_d_text)
+p2_d.place(relx = 0.94, rely = 0.096, anchor = 'ne')
+
+p4_d_text = tk.StringVar()
+p4_d_text.set(str(buy_b2.get()) + "$\n" + str(pay_b2.get()) + "$\n" + str(pledge_b2.get()) + "$")
+p4_d = tk.Label(window, bg = "light steel blue", textvariable = p4_d_text)
+p4_d.place(relx = 0.94, rely = 0.270, anchor = 'ne')
+
+#LIGHT_BLUE
+p7_d_text = tk.StringVar()
+p7_d_text.set(str(buy_l_b1.get()) + "$\n" + str(pay_l_b1.get()) + "$\n" + str(pledge_l_b1.get()) + "$")
+p7_d = tk.Label(window, bg = "light steel blue", textvariable = p7_d_text)
+p7_d.place(relx = 0.94, rely = 0.546, anchor = 'ne')
+
+p9_d_text = tk.StringVar()
+p9_d_text.set(str(buy_l_b2.get()) + "$\n" + str(pay_l_b2.get()) + "$\n" + str(pledge_l_b2.get()) + "$")
+p9_d = tk.Label(window, bg = "light steel blue", textvariable = p9_d_text)
+p9_d.place(relx = 0.94, rely = 0.726, anchor = 'ne')
+
+p10_d_text = tk.StringVar()
+p10_d_text.set(str(buy_l_b3.get()) + "$\n" + str(pay_l_b3.get()) + "$\n" + str(pledge_l_b3.get()) + "$")
+p10_d = tk.Label(window, bg = "light steel blue", textvariable = p10_d_text)
+p10_d.place(relx = 0.94, rely = 0.816, anchor = 'ne')
+
+#PINK
+d1_d_text = tk.StringVar()
+d1_d_text.set(str(buy_p1.get()) + "$\n" + str(pay_p1.get()) + "$\n" + str(pledge_p1.get()) + "$")
+d1_d = tk.Label(window, bg = "light steel blue", textvariable = d1_d_text)
+d1_d.place(relx = 0.85, rely = 0.804, anchor = 'ne')
+
+d3_d_text = tk.StringVar()
+d3_d_text.set(str(buy_p2.get()) + "$\n" + str(pay_p2.get()) + "$\n" + str(pledge_p2.get()) + "$")
+d3_d = tk.Label(window, bg = "light steel blue", textvariable = d3_d_text)
+d3_d.place(relx = 0.765, rely = 0.804, anchor = 'ne')
+
+d4_d_text = tk.StringVar()
+d4_d_text.set(str(buy_p3.get()) + "$\n" + str(pay_p3.get()) + "$\n" + str(pledge_p3.get()) + "$")
+d4_d = tk.Label(window, bg = "light steel blue", textvariable = d4_d_text)
+d4_d.place(relx = 0.7226, rely = 0.804, anchor = 'ne')
+
+#ORANGE
+d6_d_text = tk.StringVar()
+d6_d_text.set(str(buy_o1.get()) + "$\n" + str(pay_o1.get()) + "$\n" + str(pledge_o1.get()) + "$")
+d6_d = tk.Label(window, bg = "light steel blue", textvariable = d6_d_text)
+d6_d.place(relx = 0.6391, rely = 0.804, anchor = 'ne')
+
+d8_d_text = tk.StringVar()
+d8_d_text.set(str(buy_o2.get()) + "$\n" + str(pay_o2.get()) + "$\n" + str(pledge_o2.get()) + "$")
+d8_d = tk.Label(window, bg = "light steel blue", textvariable = d8_d_text)
+d8_d.place(relx = 0.5541, rely = 0.804, anchor = 'ne')
+
+d9_d_text = tk.StringVar()
+d9_d_text.set(str(buy_o3.get()) + "$\n" + str(pay_o3.get()) + "$\n" + str(pledge_o3.get()) + "$")
+d9_d = tk.Label(window, bg = "light steel blue", textvariable = d9_d_text)
+d9_d.place(relx = 0.515, rely = 0.804, anchor = 'ne')
+
+#RED
+l10_d_text = tk.StringVar()
+l10_d_text.set(str(buy_r1.get()) + "$\n" + str(pay_r1.get()) + "$\n" + str(pledge_r1.get()) + "$")
+l10_d = tk.Label(window, bg = "light steel blue", textvariable = l10_d_text)
+l10_d.place(relx = 0.415, rely = 0.817, anchor = 'ne')
+
+l8_d_text = tk.StringVar()
+l8_d_text.set(str(buy_r2.get()) + "$\n" + str(pay_r2.get()) + "$\n" + str(pledge_r2.get()) + "$")
+l8_d = tk.Label(window, bg = "light steel blue", textvariable = l8_d_text)
+l8_d.place(relx = 0.4215, rely = 0.635, anchor = 'ne')
+
+l7_d_text = tk.StringVar()
+l7_d_text.set(str(buy_r3.get()) + "$\n" + str(pay_r3.get()) + "$\n" + str(pledge_r3.get()) + "$")
+l7_d = tk.Label(window, bg = "light steel blue", textvariable = l7_d_text)
+l7_d.place(relx = 0.4215, rely = 0.544, anchor = 'ne')
+
+#YELLOW
+l5_d_text = tk.StringVar()
+l5_d_text.set(str(buy_y1.get()) + "$\n" + str(pay_y1.get()) + "$\n" + str(pledge_y1.get()) + "$")
+l5_d = tk.Label(window, bg = "light steel blue", textvariable = l5_d_text)
+l5_d.place(relx = 0.4215, rely = 0.362, anchor = 'ne')
+
+l3_d_text = tk.StringVar()
+l3_d_text.set(str(buy_y2.get()) + "$\n" + str(pay_y2.get()) + "$\n" + str(pledge_y2.get()) + "$")
+l3_d = tk.Label(window, bg = "light steel blue", textvariable = l3_d_text)
+l3_d.place(relx = 0.4215, rely = 0.271, anchor = 'ne')
+
+l2_d_text = tk.StringVar()
+l2_d_text.set(str(buy_y3.get()) + "$\n" + str(pay_y3.get()) + "$\n" + str(pledge_y3.get()) + "$")
+l2_d = tk.Label(window, bg = "light steel blue", textvariable = l2_d_text)
+l2_d.place(relx = 0.4215, rely = 0.09, anchor = 'ne')
+
+#GREEN
+g9_d_text = tk.StringVar()
+g9_d_text.set(str(buy_g1.get()) + "$\n" + str(pay_g1.get()) + "$\n" + str(pledge_g1.get()) + "$")
+g9_d = tk.Label(window, bg = "light steel blue", textvariable = g9_d_text)
+g9_d.place(relx = 0.515, rely = 0.11, anchor = 'ne')
+
+g8_d_text = tk.StringVar()
+g8_d_text.set(str(buy_g2.get()) + "$\n" + str(pay_g2.get()) + "$\n" + str(pledge_g2.get()) + "$")
+g8_d = tk.Label(window, bg = "light steel blue", textvariable = g8_d_text)
+g8_d.place(relx = 0.555, rely = 0.11, anchor = 'ne')
+
+g6_d_text = tk.StringVar()
+g6_d_text.set(str(buy_g2.get()) + "$\n" + str(pay_g3.get()) + "$\n" + str(pledge_g3.get()) + "$")
+g6_d = tk.Label(window, bg = "light steel blue", textvariable = g6_d_text)
+g6_d.place(relx = 0.64, rely = 0.11, anchor = 'ne')
+
+#ROYAL_BLUE
+g3_d_text = tk.StringVar()
+g3_d_text.set(str(buy_r_b1.get()) + "$\n" + str(pay_r_b1.get()) + "$\n" + str(pledge_r_b1.get()) + "$")
+g3_d = tk.Label(window, bg = "light steel blue", textvariable = g3_d_text)
+g3_d.place(relx = 0.765, rely = 0.11, anchor = 'ne')
+
+g1_d_text = tk.StringVar()
+g1_d_text.set(str(buy_r_b2.get()) + "$\n" + str(pay_r_b2.get()) + "$\n" + str(pledge_r_b2.get()) + "$")
+g1_d = tk.Label(window, bg = "light steel blue", textvariable = g1_d_text)
+g1_d.place(relx = 0.855, rely = 0.11, anchor = 'ne')
+
+
+#GAMEPLAY
+#-------------------------------------------------------------------------------------------------------------------------------------------
+#BUY
+def buy():
+    if pm.get() == 2:
+        for x in range(0, 22):
+            if liste[x][0] == p1_pos.get():
+                if liste[x][1].get() == 0:
+                    p1_money.set((p1_money.get()) - (liste[x][2].get()))
+                    p1_money_text.set(str(p1_money.get())+"$")
+                    liste[x][1].set(1)
+                    screen_text.set("obiekt przejęty przez gracza 1")
+    elif pm.get() == 1:
+        for x in range(0, 22):
+            if liste[x][0] == p2_pos.get():
+                if liste[x][1].get() == 0:
+                    p2_money.set((p2_money.get()) - (liste[x][2].get()))
+                    p2_money_text.set(str(p2_money.get())+"$")
+                    liste[x][1].set(2)
+                    screen_text.set("obiekt przejęty przez gracza 2")
+
+#PLEDGE
+def pledge():
+    for x in range (0, 22):
+        if liste[x][5] == give_id.get():
+            #PLEDGE1
+            if liste[x][1].get() == 1:
+                p1_money.set((p1_money.get()) + (liste[x][4].get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                liste[x][1].set(3)
+                screen_text.set("gracz 1 zastawił obiekt")
+            #RE_PLEDGE1
+            elif liste[x][1].get() == 3:
+                p1_money.set((p1_money.get()) - (liste[x][4].get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                liste[x][1].set(1)
+                screen_text.set("gracz 1 wykupił obeikt z zastawu")
+            #PLEDGE2
+            elif liste[x][1].get() == 2:
+                p2_money.set((p2_money.get()) + (liste[x][4].get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(4)
+                screen_text.set("gracz 2 zastawił obiekt")
+            #RE_PLEDGE2
+            elif liste[x][1].get() == 4:
+                p2_money.set((p2_money.get()) - (liste[x][4].get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(2)
+                screen_text.set("gracz 2 wykupił obeikt z zastawu")
+
+def sell():
+    for x in range (0, 22):
+        if liste[x][5] == give_id.get():
+            #SELL1
+            if liste[x][1].get() == 1:
+                p1_money.set((p1_money.get()) + int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) - int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(2)
+                screen_text.set("gracz 1 sprzedał obeikt")
+            #SELL2
+            elif liste[x][1].get() == 2:
+                p1_money.set((p1_money.get()) - int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) + int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(1)
+                screen_text.set("gracz 2 sprzedał obeikt")
+
+#INTERFACE
+#-------------------------------------------------------------------------------------------------------------------------------------------
+#NICKNAMES
+player1 = tk.Label(window, font = 30, bg = "light steel blue", textvariable = pl1nic)
+player1.place(relx = 0.0, rely = 0.1)
+player1_money = tk.Label(window, font = 30, bg = "light steel blue", textvariable = p1_money_text)
+player1_money.place(relx = 0.08, rely = 0.1)
+
+player2 = tk.Label(window, font = 30, bg = "light steel blue", textvariable = pl2nic)
+player2.place(relx = 0.0, rely = 0.14)
+player2_money = tk.Label(window, font = 30, bg = "light steel blue", textvariable = p2_money_text)
+player2_money.place(relx = 0.08, rely = 0.14)
+
+#OWNERS_SCREENS
+#BROWN
+mainscreen_owner_b1 = tk.Label(window, padx = 5, pady = 5, bg = "salmon4", textvariable = owner_b1)
+mainscreen_owner_b1.place(relx = 0.005, rely = 0.6, anchor ='nw')
+mainscreen_owner_b2 = tk.Label(window, padx = 5, pady = 5, bg = "salmon4", textvariable = owner_b2)
+mainscreen_owner_b2.place(relx = 0.025, rely = 0.6, anchor ='nw')
+
+#LIGHT_BLUE
+mainscreen_owner_l_b1 = tk.Label(window, padx = 5, pady = 5, bg = "sky blue2", textvariable = owner_l_b1)
+mainscreen_owner_l_b1.place(relx = 0.045, rely = 0.6, anchor ='nw')
+mainscreen_owner_l_b2 = tk.Label(window, padx = 5, pady = 5, bg = "sky blue2", textvariable = owner_l_b2)
+mainscreen_owner_l_b2.place(relx = 0.065, rely = 0.6, anchor ='nw')
+mainscreen_owner_l_b3 = tk.Label(window, padx = 5, pady = 5, bg = "sky blue2", textvariable = owner_l_b3)
+mainscreen_owner_l_b3.place(relx = 0.085, rely = 0.6, anchor ='nw')
+
+#PINK
+mainscreen_owner_p1 = tk.Label(window, padx = 5, pady = 5, bg = "hotpink2", textvariable = owner_p1)
+mainscreen_owner_p1.place(relx = 0.105, rely = 0.6, anchor ='nw')
+mainscreen_owner_p2 = tk.Label(window, padx = 5, pady = 5, bg = "hotpink2", textvariable = owner_p2)
+mainscreen_owner_p2.place(relx = 0.125, rely = 0.6, anchor ='nw')
+mainscreen_owner_p3 = tk.Label(window, padx = 5, pady = 5, bg = "hotpink2", textvariable = owner_p3)
+mainscreen_owner_p3.place(relx = 0.145, rely = 0.6, anchor ='nw')
+
+#ORANGE
+mainscreen_owner_o1 = tk.Label(window, padx = 5, pady = 5, bg = "goldenrod1", textvariable = owner_o1)
+mainscreen_owner_o1.place(relx = 0.165, rely = 0.6, anchor ='nw')
+mainscreen_owner_o2 = tk.Label(window, padx = 5, pady = 5, bg = "goldenrod1", textvariable = owner_o2)
+mainscreen_owner_o2.place(relx = 0.185, rely = 0.6, anchor ='nw')
+mainscreen_owner_o3 = tk.Label(window, padx = 5, pady = 5, bg = "goldenrod1", textvariable = owner_o3)
+mainscreen_owner_o3.place(relx = 0.205, rely = 0.6, anchor ='nw')
+
+#RED
+mainscreen_owner_r1 = tk.Label(window, padx = 5, pady = 5, bg = "red2", textvariable = owner_r1)
+mainscreen_owner_r1.place(relx = 0.005, rely = 0.72, anchor ='nw')
+mainscreen_owner_r2 = tk.Label(window, padx = 5, pady = 5, bg = "red2", textvariable = owner_r2)
+mainscreen_owner_r2.place(relx = 0.025, rely = 0.72, anchor ='nw')
+mainscreen_owner_r3 = tk.Label(window, padx = 5, pady = 5, bg = "red2", textvariable = owner_r3)
+mainscreen_owner_r3.place(relx = 0.045, rely = 0.72, anchor ='nw')
+
+#YELLOW
+mainscreen_owner_y1 = tk.Label(window, padx = 5, pady = 5, bg = "yellow", textvariable = owner_y1)
+mainscreen_owner_y1.place(relx = 0.065, rely = 0.72, anchor ='nw')
+mainscreen_owner_y2 = tk.Label(window, padx = 5, pady = 5, bg = "yellow", textvariable = owner_y2)
+mainscreen_owner_y2.place(relx = 0.085, rely = 0.72, anchor ='nw')
+mainscreen_owner_y3 = tk.Label(window, padx = 5, pady = 5, bg = "yellow", textvariable = owner_y3)
+mainscreen_owner_y3.place(relx = 0.105, rely = 0.72, anchor ='nw')
+
+#GREEN
+mainscreen_owner_g1 = tk.Label(window, padx = 5, pady = 5, bg = "green4", textvariable = owner_g1)
+mainscreen_owner_g1.place(relx = 0.125, rely = 0.72, anchor ='nw')
+mainscreen_owner_g2 = tk.Label(window, padx = 5, pady = 5, bg = "green4", textvariable = owner_g2)
+mainscreen_owner_g2.place(relx = 0.145, rely = 0.72, anchor ='nw')
+mainscreen_owner_g3 = tk.Label(window, padx = 5, pady = 5, bg = "green4", textvariable = owner_g3)
+mainscreen_owner_g3.place(relx = 0.165, rely = 0.72, anchor ='nw')
+
+#ROYAL_BLUE
+mainscreen_owner_r_b1 = tk.Label(window, padx = 5, pady = 5, bg = "royal blue", textvariable = owner_r_b1)
+mainscreen_owner_r_b1.place(relx = 0.185, rely = 0.72, anchor ='nw')
+mainscreen_owner_r_b2 = tk.Label(window, padx = 5, pady = 5, bg = "royal blue", textvariable = owner_r_b2)
+mainscreen_owner_r_b2.place(relx = 0.205, rely = 0.72, anchor ='nw')
+
+#ESTATES_ID
+#BROWN
+mainscreen_owner_b1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "b1")
+mainscreen_owner_b1.place(relx = 0.005, rely = 0.54, anchor ='nw')
+mainscreen_owner_b2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "b2")
+mainscreen_owner_b2.place(relx = 0.025, rely = 0.54, anchor ='nw')
+
+#LIGHT_BLUE
+mainscreen_owner_l_b1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "lb1")
+mainscreen_owner_l_b1.place(relx = 0.045, rely = 0.54, anchor ='nw')
+mainscreen_owner_l_b2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "lb2")
+mainscreen_owner_l_b2.place(relx = 0.065, rely = 0.54, anchor ='nw')
+mainscreen_owner_l_b3 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "lb3")
+mainscreen_owner_l_b3.place(relx = 0.085, rely = 0.54, anchor ='nw')
+
+#PINK
+mainscreen_owner_p1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "p1")
+mainscreen_owner_p1.place(relx = 0.105, rely = 0.54, anchor ='nw')
+mainscreen_owner_p2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "p2")
+mainscreen_owner_p2.place(relx = 0.125, rely = 0.54, anchor ='nw')
+mainscreen_owner_p3 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text ="p3")
+mainscreen_owner_p3.place(relx = 0.145, rely = 0.54, anchor ='nw')
+
+#ORANGE
+mainscreen_owner_o1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "o1")
+mainscreen_owner_o1.place(relx = 0.165, rely = 0.54, anchor ='nw')
+mainscreen_owner_o2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "o2")
+mainscreen_owner_o2.place(relx = 0.185, rely = 0.54, anchor ='nw')
+mainscreen_owner_o3 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "o3")
+mainscreen_owner_o3.place(relx = 0.205, rely = 0.54, anchor ='nw')
+
+#RED
+mainscreen_owner_r1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "r1")
+mainscreen_owner_r1.place(relx = 0.005, rely = 0.66, anchor ='nw')
+mainscreen_owner_r2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "r2")
+mainscreen_owner_r2.place(relx = 0.025, rely = 0.66, anchor ='nw')
+mainscreen_owner_r3 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "r3")
+mainscreen_owner_r3.place(relx = 0.045, rely = 0.66, anchor ='nw')
+
+#YELLOW
+mainscreen_owner_y1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "y1")
+mainscreen_owner_y1.place(relx = 0.065, rely = 0.66, anchor ='nw')
+mainscreen_owner_y2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "y2")
+mainscreen_owner_y2.place(relx = 0.085, rely = 0.66, anchor ='nw')
+mainscreen_owner_y3 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "y3")
+mainscreen_owner_y3.place(relx = 0.105, rely = 0.66, anchor ='nw')
+
+#GREEN
+mainscreen_owner_g1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "g1")
+mainscreen_owner_g1.place(relx = 0.125, rely = 0.66, anchor ='nw')
+mainscreen_owner_g2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "g2")
+mainscreen_owner_g2.place(relx = 0.145, rely = 0.66, anchor ='nw')
+mainscreen_owner_g3 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "g3")
+mainscreen_owner_g3.place(relx = 0.165, rely = 0.66, anchor ='nw')
+
+#ROYAL_BLUE
+mainscreen_owner_r_b1 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "rb1")
+mainscreen_owner_r_b1.place(relx = 0.185, rely = 0.66, anchor ='nw')
+mainscreen_owner_r_b2 = tk.Label(window, padx = 5, pady = 5, bg = "light steel blue", text = "rb2")
+mainscreen_owner_r_b2.place(relx = 0.205, rely = 0.66, anchor ='nw')
+
+#HELP SCREEN
+screen_text = tk.StringVar();
+screen_text.set("WITAJ :)")
+
+screen = tk.Label(window, font = 20, bg = "white", textvariable = screen_text)
+screen.place(relx = 0.16, rely = 0.27, anchor = 'nw')
+
+buy_b = tk.Button(window, font = 30, bg = "white", text = "BUY", command = buy)
+buy_b.place(relx = 0.17, rely = 0.33, anchor = 'nw')
+
+give_id_t = tk.Label(window, font = 30, bg = "light steel blue", text = "Podaj id pola:")
+give_id_t.place(relx = 0.148, rely = 0.38, anchor = 'nw')
+
+give_id = tk.Entry(window, font = 30)
+give_id.place(relx = 0.118, rely = 0.42, anchor = 'nw')
+
+give_price_t = tk.Label(window, font = 30, bg = "light steel blue", text = "Podaj cenę sprzedaży:")
+give_price_t.place(relx = 0.25, rely = 0.38, anchor = 'nw')
+
+give_price = tk.Entry(window, font = 30)
+give_price.place(relx = 0.25, rely = 0.42, anchor = 'nw')
+
+pledge_p = tk.Button(window, font = 30, bg = "white", text = "PLEDGE", command = pledge)
+pledge_p.place(relx = 0.118, rely = 0.475, anchor = 'nw')
+
+sell_p = tk.Button(window, font = 30, bg = "white", text = "SELL", command = sell)
+sell_p.place(relx = 0.212, rely = 0.475, anchor = 'nw')
