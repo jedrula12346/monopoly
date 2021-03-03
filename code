@@ -1,5 +1,6 @@
 import tkinter as tk
 from random import randint
+import time
 
 window = tk.Tk()
 window.title("planszowka")
@@ -154,6 +155,7 @@ p1_m.set("1 2")
 
 #ESTATES
 #---------------------------------------------------------------------------------------------------------------
+
 #BROWN1
 owner_b1 = tk.IntVar();
 buy_b1 = tk.IntVar();
@@ -529,10 +531,10 @@ buy_a4.set(2000)
 pledge_a4.set(1000)
 pay_a4.set(250)
 
-lista = [[6, owner_a1, buy_a1, pledge_a1, sell_a1, pay_a1, 'a1'],
-         [16, owner_a2, buy_a2, pledge_a2, sell_a2, pay_a2, 'a2'],
-         [26, owner_a3, buy_a3, pledge_a3, sell_a3, pay_a3, 'a3'],
-         [36, owner_a4, buy_a4, pledge_a4, sell_a4, pay_a4, 'a4']]
+lista = [[6, owner_a1, buy_a1, pledge_a1, sell_a1, pay_a1, "a1"],
+         [16, owner_a2, buy_a2, pledge_a2, sell_a2, pay_a2, "a2"],
+         [26, owner_a3, buy_a3, pledge_a3, sell_a3, pay_a3, "a3"],
+         [36, owner_a4, buy_a4, pledge_a4, sell_a4, pay_a4, "a4"]]
 
 #SPECIAL_OBJECTS
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -565,7 +567,7 @@ buy_os2.set(1500)
 pledge_os2.set(750)
 pay_os2.set(0)
 
-lists = [[13, owner_os1, buy_os1, pledge_os1, sell_os1, 'os1'], [26, owner_os2, buy_os2, pledge_os2, sell_os2, 'os2']]
+lists = [[13, owner_os1, buy_os1, pledge_os1, sell_os1, 'os1'], [29, owner_os2, buy_os2, pledge_os2, sell_os2, 'os2']]
 
 #MOVE
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -587,6 +589,10 @@ p2_pos.set(1)
 pm = tk.IntVar();
 pm.set(1)
 
+throw1 = tk.IntVar();
+throw2 = tk.IntVar();
+
+h_throw = tk.IntVar();
 #P1_M---------------------------------------------------------------------------------------------------------------
 
 def los():
@@ -601,11 +607,11 @@ def los():
     
     elif pm.get() == 1 and ("1" in prison_m.get()) == False:
         screen_text.set("ruch gracza 2")
-        throw1 = 1
-        throw2 = 0
+        throw1.set(1)
+        throw2.set(0)
         #throw1 = randint(1, 6)
         #throw2 = randint(1, 6)
-        p1_pos.set(p1_pos.get() + throw1 + throw2)
+        p1_pos.set(p1_pos.get() + throw1.get() + throw2.get())
 
         helpp = tk.Label(textvariable = p1_pos)
         helpp.place(relx = 0.0, rely = 0.3)
@@ -661,34 +667,39 @@ def los():
                     p2_money.set((p2_money.get()) + (lista[i][5].get()))
                     p2_money_text.set(str(p1_money.get()) + "$")
         #SPECIAL_OBJECT
-        for k in range(0, 1):
+        for k in range(0, 2):
             if lists[k][0] == p1_pos.get():
                 if lists[k][1].get() == 2:
                     if hmso2.get() == 1:
-                        p1_money.set((p1_money.get()) - ((throw1 + throw2)*40))
-                        p2_money.set((p2_money.get()) - ((throw1 + throw2)*40))
+                        pay_os1.set((throw1_get() + throw2.get())*40)
+                        p1_money.set((p1_money.get()) - ((throw1.get() + throw2.get())*40))
+                        p1_money_text.set(str(p1_money.get()) + "$")
+                        p2_money.set((p2_money.get()) + ((throw1.get() + throw2.get())*40))
+                        p2_money_text.set(str(p1_money.get()) + "$")
                     elif hmso2.get() == 2:
-                        p1_money.set((p1.money.get()) - ((throw1 + throw2)*100))
-                        p2_money.set((p2_money.get()) - ((throw1 + throw2)*100))
-        if throw1 == throw2:
+                        p1_money.set((p1_money.get()) - ((throw1.get() + throw2.get())*100))
+                        p1_money_text.set(str(p1_money.get()) + "$")
+                        p2_money.set((p2_money.get()) + ((throw1.get() + throw2.get())*100))
+                        p2_money_text.set(str(p1_money.get()) + "$")
+        if throw1.get() == throw2.get():
             pm.set(1)
-            valued.set(str(throw1) + " " + str(throw2))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
             screen_text.set("ruch gracza 1")
-            h_throw = 1
+            h_throw.set(1)
         else:
             pm.set(2)
-            valued.set(str(throw1) + " " + str(throw2))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
             screen_text.set("ruch gracza 2")
-            h_throw = 0
+            h_throw.set(0)
 
 #P1_PRISON_M
     elif pm.get() == 1 and ("1" in prison_m.get()) == True:
         screen_text.set("ruch gracza 2")
         if tryy1.get() == 1:
-            throw1 = randint(1, 6)
-            throw2 = randint(1, 6)
-            valued.set(str(throw1) + " " + str(throw2))
-            if throw1 == throw2:
+            throw1.set(randint(1, 6))
+            throw2.set(randint(1, 6))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
+            if throw1.get() == throw2.get():
                 prison_m.set((prison_m.get()).replace("1", ""))
                 p1_pos.set(11)
                 listm[10].set((listm[10].get()) + "1")
@@ -699,10 +710,10 @@ def los():
                 pm.set(2)
                 
         elif tryy1.get() == 2:
-            throw1 = randint(1, 6)
-            throw2 = randint(1, 6)
-            valued.set(str(throw1) + " " + str(throw2))
-            if throw1 == throw2:
+            throw1.set(randint(1, 6))
+            throw2.set(randint(1, 6))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
+            if throw1.get() == throw2.get():
                 prison_m.set((prison_m.get()).replace("1", ""))
                 p1_pos.set(11)
                 listm[10].set((listm[10].get()) + "1")
@@ -713,10 +724,10 @@ def los():
                 pm.set(2)
 
         elif tryy1.get() == 3:
-            throw1 = randint(1, 6)
-            throw2 = randint(1, 6)
-            valued.set(str(throw1) + " " + str(throw2))
-            if throw1 == throw2:
+            throw1.set(randint(1, 6))
+            throw2.set(randint(1, 6))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
+            if throw1.get() == throw2.get():
                 prison_m.set((prison_m.get()).replace("1", ""))
                 p1_pos.set(11)
                 listm[10].set((listm[10].get()) + "1")
@@ -741,11 +752,11 @@ def los():
         prison_m.set((prison_m.get()) + "2")
 
     elif pm.get() == 2 and ("2" in prison_m.get()) == False:
-        throw1 = 1
-        throw2 = 0
+        throw1.set(1)
+        throw2.set(0)
         #throw1 = randint(1, 6)
         #throw2 = randint(1, 6)
-        p2_pos.set(p2_pos.get() + throw1 + throw2)
+        p2_pos.set(p2_pos.get() + throw1.get() + throw2.get())
 
         helppp = tk.Label(textvariable = p2_pos)
         helppp.place(relx = 0.0, rely = 0.35)
@@ -801,35 +812,38 @@ def los():
                     p1_money.set((p1_money.get()) + (lista[i][5].get()))
                     p1_money_text.set(str(p1_money.get()) + "$")
         #SPECIAL_OBJECT
-        for k in range(0, 1):
+        for k in range(0, 2):
             if lists[k][0] == p2_pos.get():
-                screen_text.set("siedzi")
                 if lists[k][1].get() == 1:
                     if hmso1.get() == 1:
-                        p2_money.set((p2_money.get()) - ((throw1 + throw2)*40))
-                        p1_money.set((p1_money.get()) - ((throw1 + throw2)*40))
-                    elif hmso2.get() == 2:
-                        p2_money.set((p2.money.get()) - ((throw1 + throw2)*100))
-                        p1_money.set((p_money.get()) - ((throw1 + throw2)*100))
-        if throw1 == throw2:
+                        p2_money.set((p2_money.get()) - ((throw1.get() + throw2.get())*40))
+                        p2_money_text.set(str(p2_money.get()) + "$")
+                        p1_money.set((p1_money.get()) + ((throw1.get() + throw2.get())*40))
+                        p1_money_text.set(str(p1_money.get()) + "$")
+                    elif hmso1.get() == 2:
+                        p2_money.set((p2_money.get()) - ((throw1.get() + throw2.get())*100))
+                        p2_money_text.set(str(p2_money.get()) + "$")
+                        p1_money.set((p1_money.get()) + ((throw1.get() + throw2.get())*100))
+                        p1_money_text.set(str(p1_money.get()) + "$")
+        if throw1.get() == throw2.get():
             pm.set(2)
-            valued.set(str(throw1) + " " + str(throw2))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
             screen_text.set("ruch gracza 2")
-            h_throw = 2
+            h_throw.set(2)
         else:
             pm.set(1)
-            valued.set(str(throw1) + " " + str(throw2))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
             screen_text.set("ruch gracza 1")
-            h_throw = 0
+            h_throw.set(0)
 
 #P2_PRISON_M
     elif pm.get() == 2 and ("2" in prison_m.get()) == True:
         screen_text.set("ruch gracza 1")
         if tryy2.get() == 1:
-            throw1 = randint(1, 6)
-            throw2 = randint(1, 6)
-            valued.set(str(throw1) + " " + str(throw2))
-            if throw1 == throw2:
+            throw1.set(randint(1, 6))
+            throw2.set(randint(1, 6))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
+            if throw1.get() == throw2.get():
                 prison_m.set((prison_m.get()).replace("2", ""))
                 p2_pos.set(11)
                 listm[10].set((listm[10].get()) + "2")
@@ -840,10 +854,10 @@ def los():
                 pm.set(1)
                 
         elif tryy2.get() == 2:
-            throw1 = randint(1, 6)
-            throw2 = randint(1, 6)
-            valued.set(str(throw1) + " " + str(throw2))
-            if throw1 == throw2:
+            throw1.set(randint(1, 6))
+            throw2.set(randint(1, 6))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
+            if throw1.get() == throw2.get():
                 prison_m.set((prison_m.get()).replace("2", ""))
                 p2_pos.set(11)
                 listm[10].set((listm[10].get()) + "2")
@@ -853,10 +867,10 @@ def los():
                 pm.set(1)
 
         elif tryy2.get() == 3:
-            throw1 = randint(1, 6)
-            throw2 = randint(1, 6)
-            valued.set(str(throw1) + " " + str(throw2))
-            if throw1 == throw2:
+            throw1.set(randint(1, 6))
+            throw2.set(randint(1, 6))
+            valued.set(str(throw1.get()) + " " + str(throw2.get()))
+            if throw1.get() == throw2.get():
                 prison_m.set((prison_m.get()).replace("2", ""))
                 p2_pos.set(11)
                 listm[10].set((listm[10].get()) + "2")
@@ -1417,19 +1431,20 @@ def air_pay():
     for x in range(0, 3):
         if lista[x][1].get() == 1:
            lista[x][5].set(250 * hmanyp1.get())
-           screen_text.set(listd[22].get())
            listd[x + 22].set(str(buy_a1.get()) + "$\n" + str(lista[x][5].get()) + "$\n" + str(pledge_a1.get()) + "$")
         elif lista[x][1].get() == 2:
            lista[x][5].set(250 * hmanyp2.get())
-           listd[x + 22].set(str(buy_a1.get()) + "$\n" + str(lista[x][5].get()) + "$\n" + str(pledge_a1.get()) + "$")
+           listd[x + 22].set(str(buy_a1.get()) + "$\n" + str(lista[x][5].get()) + "$\n" + str(pledge_a1.get()) + "$")                
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #BUY
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 def buy():
-    if pm.get() == 2 or h_throw == 1:
+    #BUY1
+    if pm.get() == 2 or h_throw.get() == 1:
         for x in range(0, 22):
-            for y in range(0, 3):
-                for z in range(0, 1):
+            for y in range(0, 4):
+                for z in range(0, 2):
                     if liste[x][0] == p1_pos.get():
                         if liste[x][1].get() == 0:
                             p1_money.set((p1_money.get()) - (liste[x][2].get()))
@@ -1453,10 +1468,10 @@ def buy():
                             lists[z][1].set(1)
                             hmso1.set(hmso1.get() + 1)
                             screen_text.set("obiekt przejęty przez gracza 1")
-                        
-    elif pm.get() == 1 or h_throw ==2:
+    #BUY2               
+    elif pm.get() == 1 or h_throw.get() == 2:
         for x in range (0, 22):
-            for y in range(0, 3):
+            for y in range(0, 4):
                 for z in range(0, 2):
                     if liste[x][0] == p2_pos.get():
                         if liste[x][1].get() == 0:
@@ -1486,41 +1501,93 @@ def buy():
 #PLEDGE
 def pledge():
     for x in range (0, 22) :
-        for y in range(0, 3):
-            for z in range(0 ,1):
-                if liste[x][5] == give_id.get():
-                    #PLEDGE1
-                    if liste[x][1].get() == 1:
-                        p1_money.set((p1_money.get()) + (liste[x][4].get()))
-                        p1_money_text.set(str(p1_money.get())+"$")
-                        liste[x][1].set(3)
-                        screen_text.set("gracz 1 zastawił obiekt")
-                    #RE_PLEDGE1
-                    elif liste[x][1].get() == 3:
-                        p1_money.set((p1_money.get()) - (liste[x][4].get()))
-                        p1_money_text.set(str(p1_money.get())+"$")
-                        liste[x][1].set(1)
-                        screen_text.set("gracz 1 wykupił obeikt z zastawu")
-                    #PLEDGE2
-                    elif liste[x][1].get() == 2:
-                        p2_money.set((p2_money.get()) + (liste[x][4].get()))
-                        p2_money_text.set(str(p2_money.get())+"$")
-                        liste[x][1].set(4)
-                        screen_text.set("gracz 2 zastawił obiekt")
-                    #RE_PLEDGE2
-                    elif liste[x][1].get() == 4:
-                        p2_money.set((p2_money.get()) - (liste[x][4].get()))
-                        p2_money_text.set(str(p2_money.get())+"$")
-                        liste[x][1].set(2)
-                        screen_text.set("gracz 2 wykupił obeikt z zastawu")
-                #AIRPORTS
-
+        if liste[x][5] == give_id.get():
+            #PLEDGE1
+            if liste[x][1].get() == 1:
+                p1_money.set((p1_money.get()) + (liste[x][4].get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                liste[x][1].set(3)
+                screen_text.set("gracz 1 zastawił obiekt")
+            #RE_PLEDGE1
+            elif liste[x][1].get() == 3:
+                p1_money.set((p1_money.get()) - (liste[x][4].get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                liste[x][1].set(1)
+                screen_text.set("gracz 1 wykupił obeikt z zastawu")
+            #PLEDGE2
+            elif liste[x][1].get() == 2:
+                p2_money.set((p2_money.get()) + (liste[x][4].get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(4)
+                screen_text.set("gracz 2 zastawił obiekt")
+            #RE_PLEDGE2
+            elif liste[x][1].get() == 4:
+                p2_money.set((p2_money.get()) - (liste[x][4].get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(2)
+                screen_text.set("gracz 2 wykupił obeikt z zastawu")
+    #AIRPORTS
+    for y in range(0, 4):
+        if lista[y][6] == give_id.get():
+            #PLEDGE1
+            if lista[y][1].get() == 1:
+                p1_money.set(p1_money.get() + lista[y][3].get())
+                p1_money_text.set(str(p1_money.get()) + "$")
+                lista[y][1].set(3)
+                screen_text.set("gracz 1 zastawił obiekt")
+            #RE_PLEDGE1
+            elif lista[y][1].get() == 3:
+                p1_money.set(p1_money.get() - lista[y][3].get())
+                p1_money_text.set(str(p1_money.get()) + "$")
+                lista[y][1].set(1)
+                screen_text.set("gracz 1 wykupil obiekt z zastawu")
+            #PLEDGE2
+            if lista[y][1].get() == 2:
+                p2_money.set(p2_money.get() + lista[y][3].get())
+                p2_money_text.set(str(p2_money.get()) + "$")
+                lista[y][1].set(4)
+                screen_text.set("gracz 2 zastawił obiekt")
+            #RE_PLEDGE2
+            elif lista[y][1].get() == 4:
+                p2_money.set(p2_money.get() - lista[y][3].get())
+                p2_money_text.set(str(p2_money.get()) + "$")
+                lista[y][1].set(2)
+                screen_text.set("gracz 2 wykupil obiekt z zastawu")
+    #SPECIAL_OBJECTS
+    for z in range(0, 2):
+        if lists[z][5] == give_id.get():
+            #PLEDGE1
+            if lists[z][1].get() == 1:
+                p1_money.set(p1_money.get() + lists[z][3].get())
+                p1_money_text.set(str(p1_money.get()) + "$")
+                lists[z][1].set(3)
+                screen_text.set("gracz 1 zastawił obiekt")
+            #RE_PLEDGE1
+            elif lists[z][1].get() == 3:
+                p1_money.set(p1_money.get() - lists[z][3].get())
+                p1_money_text.set(str(p1_money.get()) + "$")
+                lists[z][1].set(1)
+                screen_text.set("gracz 1 wykupil obiekt z zastawu")
+            #PLEDGE2
+            if lists[z][1].get() == 2:
+                p2_money.set(p2_money.get() + lists[z][3].get())
+                p2_money_text.set(str(p2_money.get()) + "$")
+                lists[z][1].set(4)
+                screen_text.set("gracz 2 zastawił obiekt")
+            #RE_PLEDGE2
+            elif lists[z][1].get() == 4:
+                p2_money.set(p2_money.get() - lists[z][3].get())
+                p2_money_text.set(str(p2_money.get()) + "$")
+                lists[z][1].set(2)
+                screen_text.set("gracz 2 wykupil obiekt z zastawu")
+        
+                
 #SELL
 def sell():
     for x in range(0, 22):
         if liste[x][5] == give_id.get():
             #SELL1
-            if liste[x][1].get() == 1 and give_price.get() != None:
+            if liste[x][1].get() == 1 and give_price.get() != '':
                 p1_money.set((p1_money.get()) + int(give_price.get()))
                 p1_money_text.set(str(p1_money.get())+"$")
                 p2_money.set((p2_money.get()) - int(give_price.get()))
@@ -1528,47 +1595,166 @@ def sell():
                 liste[x][1].set(2)
                 screen_text.set("gracz 1 sprzedał obeikt")
             #SELL2
-            elif liste[x][1].get() == 2 and give_price.get() != None:
+            elif liste[x][1].get() == 2 and give_price.get() != '':
                 p1_money.set((p1_money.get()) - int(give_price.get()))
                 p1_money_text.set(str(p1_money.get())+"$")
                 p2_money.set((p2_money.get()) + int(give_price.get()))
                 p2_money_text.set(str(p2_money.get())+"$")
                 liste[x][1].set(1)
                 screen_text.set("gracz 2 sprzedał obeikt")
+            #SELL3
+            elif liste[x][1].get() == 3 and give_price.get() != '':
+                p1_money.set((p1_money.get()) + int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) - int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(4)
+                screen_text.set("gracz 1 sprzedał obeikt")
+            #SELL4
+            elif liste[x][1].get() == 4 and give_price.get() != '':
+                p1_money.set((p1_money.get()) - int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) + int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                liste[x][1].set(3)
+                screen_text.set("gracz 2 sprzedał obeikt")
+            else:
+                screen_text.set("Podaj cenę!")
+    #AIRPORTS
+    for y in range(0, 4):
+        if lista[y][6] == give_id.get():
+            #SELL1
+            if lista[y][1].get() == 1 and give_price.get() != '':
+                p1_money.set((p1_money.get()) + int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) - int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lista[y][1].set(2)
+                screen_text.set("gracz 1 sprzedał obeikt")
+            #SELL2
+            elif lista[y][1].get() == 2 and give_price.get() != '':
+                p1_money.set((p1_money.get()) - int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) + int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lista[y][1].set(1)
+                screen_text.set("gracz 2 sprzedał obeikt")
+            #SELL3
+            if lista[y][1].get() == 3 and give_price.get() != '':
+                p1_money.set((p1_money.get()) + int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) - int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lista[y][1].set(4)
+                screen_text.set("gracz 1 sprzedał obeikt")
+            #SELL4
+            elif lista[y][1].get() == 4 and give_price.get() != '':
+                p1_money.set((p1_money.get()) - int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) + int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lista[y][1].set(3)
+                screen_text.set("gracz 2 sprzedał obeikt")
+            else:
+                screen_text.set("Podaj cenę!")
+    #SPECIAL_OBJECTS
+    for z in range(0, 2):
+        if lists[z][5] == give_id.get():
+            #SELL1
+            if lists[z][1].get() == 1 and give_price.get() != '':
+                p1_money.set((p1_money.get()) + int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) - int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lists[z][1].set(2)
+                screen_text.set("gracz 1 sprzedał obeikt")
+            #SELL2
+            elif lists[z][1].get() == 2 and give_price.get() != '':
+                p1_money.set((p1_money.get()) - int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) + int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lists[z][1].set(1)
+                screen_text.set("gracz 2 sprzedał obeikt")
+            #SELL3
+            if lists[z][1].get() == 3 and give_price.get() != '':
+                p1_money.set((p1_money.get()) + int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) - int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lists[z][1].set(4)
+                screen_text.set("gracz 1 sprzedał obeikt")
+            #SELL4
+            elif lists[z][1].get() == 4 and give_price.get() != '':
+                p1_money.set((p1_money.get()) - int(give_price.get()))
+                p1_money_text.set(str(p1_money.get())+"$")
+                p2_money.set((p2_money.get()) + int(give_price.get()))
+                p2_money_text.set(str(p2_money.get())+"$")
+                lists[z][1].set(3)
+                screen_text.set("gracz 2 sprzedał obeikt")
+            else:
+                screen_text.set("Podaj cenę!")
 
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #BUILD
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+all_owner = tk.IntVar();
+all_owner.set(0)
 def build():
     for x in range(0, 22):
         if liste[x][5] == give_id.get():
+            if give_id.get() == "b1" or give_id.get() == "b2" or give_id.get() == "r_b1" or give_id.get() == "r_b2":
+                if "1" in give_id.get():
+                    if liste[x + 1][1].get() == 1:
+                        all_owner.set(1)
+                elif "2" in give_id.get():
+                    if liste[x - 1][1].get() == 1:
+                        all_owner.set(1)
+            else:
+                if "1" in give_id.get():
+                    if liste[x + 1][1].get() == 1 and liste[x + 2][1].get() == 1:
+                        all_owner.set(1)
+                elif "2" in give_id.get():
+                    if liste[x - 1][1].get() == 1 and liste[x + 1][1].get() == 1:
+                        all_owner.set(1)
+                elif "3" in give_id.get():
+                    if liste[x - 1][1].get() == 1 and liste[x - 2][1].get() == 1:
+                        all_owner.set(1)
             #BUILD1
-            if liste[x][1].get() == 1:
+            if liste[x][1].get() == 1 and all_owner.get() == 1 and listb[x][1] < 5:
                 p1_money.set((p1_money.get()) - liste[x][6].get())
                 p1_money_text.set(str(p1_money.get())+"$")
                 if listb[x][1] < 4:
                     listb[x][listb[x][1]+2].configure(bg = "green")
                     liste[x][3].set(listb_v[x][listb[x][1]])
                     listd[x].set(str(liste[x][2].get()) + "$\n" + str(liste[x][3].get()) + "$\n" + str(liste[x][6].get()) + "$\n" + str(liste[x][4].get()) + "$")
-                    listb[x][1] = listb[x][1] + 1
+                    listb[x][1] += 1
                 elif listb[x][1] == 4:
                     for u in range(2, 6):
                         listb[x][u].configure(bg = "red")
                     liste[x][3].set(listb_v[x][listb[x][1]])
                     listd[x].set(str(liste[x][2].get()) + "$\n" + str(liste[x][3].get()) + "$\n" + str(liste[x][6].get()) + "$\n" + str(liste[x][4].get()) + "$")
+                    listb[x][1] += 1
             #BUILD2
-            elif liste[x][1].get() == 2:
+            elif liste[x][1].get() == 2 and all_owner.get() == 1 and listb[x][1] < 5:
                 p2_money.set((p2_money.get()) - liste[x][6].get())
                 p2_money_text.set(str(p2_money.get())+"$")
                 if listb[x][1] < 4:
                     listb[x][listb[x][1]+2].configure(bg = "green")
                     liste[x][3].set(listb_v[x][listb[x][1]])
                     listd[x].set(str(liste[x][2].get()) + "$\n" + str(liste[x][3].get()) + "$\n" + str(liste[x][6].get()) + "$\n" + str(liste[x][4].get()) + "$")
-                    listb[x][1] =listb[x][1] + 1
+                    listb[x][1] += 1
                 elif listb[x][1] == 4:
                     for u in range(2, 6):
                         listb[x][u].configure(bg = "red")
                     liste[x][3].set(listb_v[x][listb[x][1]])
-                    listd[x].set(str(liste[x][2].get()) + "$\n" + str(liste[x][3].get()) + "$\n" + str(liste[x][6].get()) + "$\n" + str(liste[x][4].get()) + "$")          
-                    
+                    listd[x].set(str(liste[x][2].get()) + "$\n" + str(liste[x][3].get()) + "$\n" + str(liste[x][6].get()) + "$\n" + str(liste[x][4].get()) + "$")
+                    listb[x][1] += 1
+            elif all_owner.get() == 0:
+                screen_text.set("musisz mieć wszystkie obiekty żeby budować")
+            else:
+                screen_text.set("obiekt jest w pełni zabudowany!")
+                        
 #INTERFACE
 #-------------------------------------------------------------------------------------------------------------------------------------------
 #NICKNAMES
